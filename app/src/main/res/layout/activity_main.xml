@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/primaryColor"
     android:visibility="visible">
 
     <EditText
@@ -15,7 +17,10 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="@string/act_main_name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/secondaryColor"
+        android:textColorHint="@color/primaryText"
+        android:textColorLink="@color/secondaryColor" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -27,7 +32,10 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/act_main_password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/secondaryColor"
+        android:textColorHint="@color/primaryText"
+        android:textColorLink="@color/secondaryColor" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -36,6 +44,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Login" />
+        android:text="@string/act_main_loginbtn" />
 </LinearLayout>
 

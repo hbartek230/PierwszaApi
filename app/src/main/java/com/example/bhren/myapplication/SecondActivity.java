@@ -16,14 +16,11 @@ public class SecondActivity extends AppCompatActivity {
         AddHarvest = findViewById(R.id.btnAddHarvest);
 
         AddHarvest.setOnClickListener((v)->{
-            addHarvest();
+            startActivity(new Intent(SecondActivity.this, AddHarvestActivity.class));
+            finish();
                 }
         );
 
         }
 
-        private void addHarvest(){
-        startActivity(new Intent(SecondActivity.this, AddHarvestActivity.class));
-        finish();
-        }
 }

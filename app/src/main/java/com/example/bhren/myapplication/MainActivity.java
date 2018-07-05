@@ -72,21 +72,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-    /*private void login(String userName, String userPassword) {
-        if ((userName.equals("admin")) && (userPassword.equals("123"))) {
-            RightInfo = "Hasło poprawne. Zalogowano";
-            Toast.makeText(MainActivity.this, RightInfo, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
-            finish();
-        } else {
-            counter--;
-            WrongInfo = "Błędne hasło. Pozostało prób: " + String.valueOf(counter);
-            Toast.makeText(MainActivity.this, WrongInfo, Toast.LENGTH_SHORT).show();
-            if (counter == 0) {
-                Login.setEnabled(false);
-            }
-        }*/
     }
 }

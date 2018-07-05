@@ -3,14 +3,16 @@ package com.example.bhren.myapplication.Model;
 public class Users {
     private String email;
     private String password;
+    private String chmod;
 
     public Users(){
 
     }
 
-    public Users(String email, String password) {
+    public Users(String email, String password, String chmod) {
         this.email = email;
         this.password = password;
+        this.chmod = chmod;
     }
 
     public String getEmail() {
@@ -27,5 +29,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getChmod(){
+        return chmod;
+    }
+
+    public void setChmod(String chmod){
+        this.chmod = chmod;
     }
 }

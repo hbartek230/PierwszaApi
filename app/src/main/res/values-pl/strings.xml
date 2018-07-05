@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Pszczółka Majusia</string>
+    //MainScreen Strings
     <string name="act_main_name">Nazwa</string>
     <string name="act_main_password">Hasło</string>
+    <string name="act_main_loginbtn">Zaloguj</string>
 
     <string name="act_menu_addHarvest">Dodaj zbiór</string>
     <string name="act_menu_addSell">Dodaj sprzedaż</string>
-    <string name="act_menu_viewHistory">Sprawdź historię</string>
+    <string name="act_menu_viewHistory">Sprawdź historię sprzedaży</string>
 
     <string-array name="act_addHarvest_spinner">
         <item>Rzepak</item>
