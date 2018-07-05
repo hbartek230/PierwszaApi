@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Pszczółka Majusia</string>
+    <string name="act_main_name">Name</string>
+    <string name="act_main_password">Password</string>
+
+    <string name="act_menu_addHarvest">Add Harvest</string>
+    <string name="act_menu_addSell">Add Sell</string>
+    <string name="act_menu_viewHistory">View History</string>
+
+    <string-array name="act_addHarvest_spinner">
+        <item>Rzepak</item>
+        <item>Akacja</item>
+        <item>Lipa</item>
+    </string-array>
+
+    <string name="kgTextField">How many kilograms?</string>
+    <string name="glassTextField">How many glasses?</string>
+</resources>
