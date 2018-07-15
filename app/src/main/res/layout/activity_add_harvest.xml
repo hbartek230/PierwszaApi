@@ -16,13 +16,13 @@
         android:orientation="vertical">
 
         <Spinner
-            android:id="@+id/spinner4"
+            android:id="@+id/honeySpinner"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textSize="18sp"
             android:entries="@array/act_addHarvest_spinner"
-            android:paddingLeft="16dp" />
+            android:paddingLeft="16dp"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,5 +55,39 @@
             android:hint="@string/glassTextField"
             android:inputType="textPersonName"
             android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addHarv"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="addHarv" />
+
+        <Button
+            android:id="@+id/chckHarv"
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:text="chckHarv" />
+
+        <EditText
+            android:id="@+id/etSummary"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etHoneyKind"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
     </LinearLayout>
 </LinearLayout>

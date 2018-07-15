@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText etName;
     private EditText etPassword;
     private Button btnLogin;
-    private int counter = 5;
-    String WrongInfo;
-    String RightInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference table_users = database.getReference("Users");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_users = database.getReference("Users");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,18 +44,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Czy użytkownik istnieje
-                        if(dataSnapshot.child(etName.getText().toString()).exists()) {
+                        if (dataSnapshot.child(etName.getText().toString()).exists()) {
                             mDialog.dismiss();
-                            Users users = dataSnapshot.child(etName.getText().toString()).getValue(Users.class);
-                            if (users.getPassword().equals(etPassword.getText().toString())) {
+                            Users user = dataSnapshot.child(etName.getText().toString()).getValue(Users.class);
+                            if (user.getPassword().equals(etPassword.getText().toString())) {
                                 Toast.makeText(MainActivity.this, "Login poprawny", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(MainActivity.this, "Login niepoprawny", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else{
+                        } else {
                             mDialog.dismiss();
                             Toast.makeText(MainActivity.this, "Użytkownik nie istnieje", Toast.LENGTH_SHORT).show();
                         }
