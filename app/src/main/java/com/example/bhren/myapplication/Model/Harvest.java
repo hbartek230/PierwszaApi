@@ -5,13 +5,13 @@ public class Harvest {
     private String glasses;
 
     public Harvest() {
-
     }
 
     public Harvest(String kilo, String glasses) {
         this.kilo = kilo;
         this.glasses = glasses;
     }
+
 
     public String getKilo() {
         return kilo;

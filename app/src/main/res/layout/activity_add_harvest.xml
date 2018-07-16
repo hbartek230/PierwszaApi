@@ -32,29 +32,57 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etKilos"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/kgTextField"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etGlasses"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/glassTextField"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            <Switch
+                android:id="@+id/kgSwitcher"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/kgSwitcher" />
+
+            <EditText
+                android:id="@+id/etKilos"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/kgTextField"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/glassSwitcher"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/glassSwitcher" />
+
+            <EditText
+                android:id="@+id/etGlasses"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/glassTextField"
+                android:inputType="number"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -68,26 +96,7 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="addHarv" />
+            android:text="@string/addHarvButton" />
 
-        <Button
-            android:id="@+id/chckHarv"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:text="chckHarv" />
-
-        <EditText
-            android:id="@+id/etSummary"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/etHoneyKind"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
     </LinearLayout>
 </LinearLayout>

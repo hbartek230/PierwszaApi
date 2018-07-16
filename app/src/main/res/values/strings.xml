@@ -8,13 +8,16 @@
     <string name="act_menu_addHarvest">Add Harvest</string>
     <string name="act_menu_addSell">Add Sell</string>
     <string name="act_menu_viewHistory">View Sell History</string>
-
+<!-- AddHarvestActivity -->
     <string-array name="act_addHarvest_spinner">
         <item>Rzepak</item>
         <item>Akacja</item>
         <item>Lipa</item>
     </string-array>
-
     <string name="kgTextField">How many kilograms?</string>
     <string name="glassTextField">How many glasses?</string>
+    <string name="kgSwitcher">Add Kilos?</string>
+    <string name="glassSwitcher">Add Glasses?</string>
+    <string name="addHarvButton">Add Harvest</string>
+<!---End of AddHarvestActivity-->
 </resources>
