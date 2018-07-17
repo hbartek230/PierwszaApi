@@ -2,14 +2,16 @@ package com.example.bhren.myapplication.Model;
 
 public class Harvest {
     private String kilo;
-    private String glasses;
+    private String bigGlasses;
+    private String smallGlasses;
 
     public Harvest() {
     }
 
-    public Harvest(String kilo, String glasses) {
+    public Harvest(String kilo, String bigGlasses, String smallGlasses) {
         this.kilo = kilo;
-        this.glasses = glasses;
+        this.bigGlasses = bigGlasses;
+        this.smallGlasses = smallGlasses;
     }
 
 
@@ -21,11 +23,19 @@ public class Harvest {
         this.kilo = kilo;
     }
 
-    public String getGlasses() {
-        return glasses;
+    public String getBigGlasses() {
+        return bigGlasses;
     }
 
-    public void setGlasses(String glasses) {
-        this.glasses = glasses;
+    public void setBigGlasses(String bigGlasses) {
+        this.bigGlasses = bigGlasses;
+    }
+
+    public String getSmallGlasses() {
+        return smallGlasses;
+    }
+
+    public void setSmallGlasses(String smallGlasses) {
+        this.smallGlasses = smallGlasses;
     }
 }

@@ -21,11 +21,15 @@ import com.google.firebase.database.ValueEventListener;
 public class AddHarvestActivity extends AppCompatActivity {
 
     private EditText etKilo;
-    private EditText etGlasses;
+    private EditText etBigGlasses;
+    private EditText etSmallGlasses;
     private Button btnAddHarv;
     private Spinner honeySpinner;
-    private Switch kgSwitcher, glassSwitcher;
-    private int currentKilo, oldKilo, summaryKilo, currentGlasses, oldGlasses, summaryGlasses;
+    private Switch kgSwitcher;
+    private Switch bgSwitcher;
+    private Switch sgSwitcher;
+    private Switch glassSwitcher;
+    private int currentKilo = 0, oldKilo, summaryKilo, currentBigGlasses = 0, oldBigGlasses, summaryBigGlasses, currentSmallGlasses = 0, oldSmallGlasses, summarySmallGlasses;
 
     DatabaseReference table_harvest;
 
@@ -34,121 +38,77 @@ public class AddHarvestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_harvest);
         etKilo = findViewById(R.id.etKilos);
-        etGlasses = findViewById(R.id.etGlasses);
+        kgSwitcher = findViewById(R.id.kgSwitcher);
+        etBigGlasses = findViewById(R.id.bgEditText);
+        bgSwitcher = findViewById(R.id.bgSwitcher);
+        etSmallGlasses = findViewById(R.id.sgEditText);
+        sgSwitcher = findViewById(R.id.sgSwitcher);
         btnAddHarv = findViewById(R.id.addHarv);
         honeySpinner = findViewById(R.id.honeySpinner);
-        kgSwitcher = findViewById(R.id.kgSwitcher);
         glassSwitcher = findViewById(R.id.glassSwitcher);
 
         kgSwitcher.setChecked(false);
-        glassSwitcher.setChecked(false);
+        bgSwitcher.setChecked(false);
+        sgSwitcher.setChecked(false);
+        bgSwitcher.setEnabled(false);
+        sgSwitcher.setEnabled(false);
         etKilo.setEnabled(false);
-        etGlasses.setEnabled(false);
+        etBigGlasses.setEnabled(false);
+        etSmallGlasses.setEnabled(false);
         table_harvest = FirebaseDatabase.getInstance().getReference("Harvest");
         switchers();
 
         btnAddHarv.setOnClickListener(v -> {
-            if (kgSwitcher.isChecked() && glassSwitcher.isChecked()) {
-                setHoneyGlasses();
-                setHoneyKilo();
-            } else if (kgSwitcher.isChecked()) {
-                setHoneyKilo();
-            } else if (glassSwitcher.isChecked()) {
-                setHoneyGlasses();
-            }
+            setHoney();
         });
     }
 
-    private void setHoneyKilo() {
-        getHoneyKilo();
-        getHoneyGlasses();
+    //Adding kilograms, small and/or big glasses to Firebase
+    private void setHoney() {
         table_harvest.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(honeySpinner.getSelectedItem().toString()).exists()) {
-                    if (etKilo.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(AddHarvestActivity.this, "Nie wprowadzono danych", Toast.LENGTH_SHORT).show();
-                    } else {
-                        DatabaseReference addHarvRef = table_harvest.child(honeySpinner.getSelectedItem().toString());
-                        currentKilo = Integer.parseInt(etKilo.getText().toString());
-                        summaryKilo = oldKilo + currentKilo;
-                        Harvest setHarvest = new Harvest(Integer.toString(summaryKilo), Integer.toString(oldGlasses));
-                        addHarvRef.setValue(setHarvest);
-                        Toast.makeText(AddHarvestActivity.this, "Zmieniono zbiór", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(AddHarvestActivity.this, "Coś poszło nie tak", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(AddHarvestActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getHoneyKilo() {
-        table_harvest.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(honeySpinner.getSelectedItem().toString()).exists()) {
+                    DatabaseReference addHarvRef = table_harvest.child(honeySpinner.getSelectedItem().toString());
                     Harvest harvest = dataSnapshot.child(honeySpinner.getSelectedItem().toString()).getValue(Harvest.class);
+                    if (kgSwitcher.isChecked()) {
+                        if (!etKilo.getText().toString().isEmpty()) {
+                            currentKilo = Integer.parseInt(etKilo.getText().toString().trim());
+                        } else {
+                            Toast.makeText(AddHarvestActivity.this, "Nie wprowadzono ilości kilo", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    if (bgSwitcher.isChecked()) {
+                        if (!etBigGlasses.getText().toString().isEmpty()) {
+                            currentBigGlasses = Integer.parseInt(etBigGlasses.getText().toString().trim());
+                        } else {
+                            Toast.makeText(AddHarvestActivity.this, "Nie wprowadzono ilości dużych słoików", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    if (sgSwitcher.isChecked()) {
+                        if (!etSmallGlasses.getText().toString().isEmpty()) {
+                            currentSmallGlasses = Integer.parseInt(etSmallGlasses.getText().toString().trim());
+                        } else {
+                            Toast.makeText(AddHarvestActivity.this, "Nie wprowadzono ilości małych słoików", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     oldKilo = Integer.parseInt(harvest.getKilo());
+                    oldBigGlasses = Integer.parseInt(harvest.getBigGlasses());
+                    oldSmallGlasses = Integer.parseInt(harvest.getSmallGlasses());
+                    summaryKilo = oldKilo + currentKilo;
+                    summaryBigGlasses = oldBigGlasses + currentBigGlasses;
+                    summarySmallGlasses = oldSmallGlasses + currentSmallGlasses;
+                    Harvest setHarvest = new Harvest(Integer.toString(summaryKilo), Integer.toString(summaryBigGlasses), Integer.toString(summarySmallGlasses));
+                    addHarvRef.setValue(setHarvest);
                 } else {
                     Toast.makeText(AddHarvestActivity.this, "Nie mamy takiego moidu w składzie", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
 
-    private void setHoneyGlasses() {
-        getHoneyGlasses();
-        getHoneyKilo();
-        table_harvest.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(honeySpinner.getSelectedItem().toString()).exists()) {
-                    if (etGlasses.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(AddHarvestActivity.this, "Nie wprowadzono danych", Toast.LENGTH_SHORT).show();
-                    } else {
-                        DatabaseReference addHarvRef = table_harvest.child(honeySpinner.getSelectedItem().toString());
-                        currentGlasses = Integer.parseInt(etGlasses.getText().toString());
-                        summaryGlasses = oldGlasses + currentGlasses;
-                        Harvest setHarvest = new Harvest(Integer.toString(oldKilo), Integer.toString(summaryGlasses));
-                        addHarvRef.setValue(setHarvest);
-                        Toast.makeText(AddHarvestActivity.this, "Zmieniono zbiór", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(AddHarvestActivity.this, "Coś poszło nie tak", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(AddHarvestActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getHoneyGlasses() {
-        table_harvest.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(honeySpinner.getSelectedItem().toString()).exists()) {
-                    Harvest harvest = dataSnapshot.child(honeySpinner.getSelectedItem().toString()).getValue(Harvest.class);
-                    oldGlasses = Integer.parseInt(harvest.getGlasses());
-                } else {
-                    Toast.makeText(AddHarvestActivity.this, "Nie mamy takiego moidu w składzie", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
     }
@@ -160,15 +120,43 @@ public class AddHarvestActivity extends AppCompatActivity {
             } else {
                 etKilo.setEnabled(false);
                 etKilo.setText("");
+                currentKilo = 0;
             }
         });
 
         glassSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                etGlasses.setEnabled(true);
+                bgSwitcher.setEnabled(true);
+                sgSwitcher.setEnabled(true);
             } else {
-                etGlasses.setEnabled(false);
-                etGlasses.setText("");
+                bgSwitcher.setEnabled(false);
+                sgSwitcher.setEnabled(false);
+                etBigGlasses.setEnabled(false);
+                etBigGlasses.setText("");
+                etSmallGlasses.setEnabled(false);
+                etSmallGlasses.setText("");
+                currentSmallGlasses = 0;
+                currentBigGlasses = 0;
+            }
+        });
+
+        bgSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                etBigGlasses.setEnabled(true);
+            } else {
+                etBigGlasses.setEnabled(false);
+                etBigGlasses.setText("");
+                currentBigGlasses = 0;
+            }
+        });
+
+        sgSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                etSmallGlasses.setEnabled(true);
+            } else {
+                etSmallGlasses.setEnabled(false);
+                etSmallGlasses.setText("");
+                currentSmallGlasses = 0;
             }
         });
     }

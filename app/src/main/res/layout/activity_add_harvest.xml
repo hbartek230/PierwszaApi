@@ -41,6 +41,7 @@
                 android:id="@+id/kgSwitcher"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="@string/kgSwitcher" />
 
@@ -48,9 +49,7 @@
                 android:id="@+id/etKilos"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/kgTextField"
@@ -61,28 +60,74 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <Switch
                 android:id="@+id/glassSwitcher"
-                android:layout_width="250dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="@string/glassSwitcher" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/bgSwitcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/bigGlassSwitcher" />
 
             <EditText
-                android:id="@+id/etGlasses"
-                android:layout_width="250dp"
+                android:id="@+id/bgEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="@string/glassTextField"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/sgSwitcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="@string/smallGlassSwitcher" />
+
+            <EditText
+                android:id="@+id/sgEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/glassTextField"
                 android:inputType="number"
                 android:textSize="18sp" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -99,4 +144,5 @@
             android:text="@string/addHarvButton" />
 
     </LinearLayout>
+
 </LinearLayout>

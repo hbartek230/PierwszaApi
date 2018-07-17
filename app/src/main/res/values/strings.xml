@@ -19,5 +19,7 @@
     <string name="kgSwitcher">Add Kilos?</string>
     <string name="glassSwitcher">Add Glasses?</string>
     <string name="addHarvButton">Add Harvest</string>
+    <string name="bigGlassSwitcher">Big Glasses?</string>
+    <string name="smallGlassSwitcher">Small Glasses?</string>
 <!---End of AddHarvestActivity-->
 </resources>
