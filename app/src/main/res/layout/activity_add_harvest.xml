@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    android:gravity="top"
     android:orientation="vertical"
+    android:padding="8dp"
     tools:context=".AddHarvestActivity">
 
     <LinearLayout
@@ -20,8 +21,11 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/spinner_background"
+            android:dropDownWidth="100dp"
             android:entries="@array/act_addHarvest_spinner"
             android:paddingLeft="16dp"
+            android:popupBackground="@color/secondaryColor"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -43,40 +47,45 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="@string/kgSwitcher" />
+                android:text="@string/kgSwitcher"
+                android:textColor="@color/secondaryColor" />
 
             <EditText
                 android:id="@+id/etKilos"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
+                android:background="@drawable/login_edit_text"
                 android:ems="10"
                 android:hint="@string/kgTextField"
                 android:inputType="number"
+                android:paddingLeft="8dp"
+                android:textColor="@color/primaryColor"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
             <Switch
                 android:id="@+id/glassSwitcher"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="@string/glassSwitcher" />
+                android:text="@string/glassSwitcher"
+                android:textColor="@color/secondaryColor" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -90,16 +99,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/bigGlassSwitcher" />
+                android:text="@string/bigGlassSwitcher"
+                android:textColor="@color/secondaryColor" />
 
             <EditText
                 android:id="@+id/bgEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_margin="8dp"
+                android:background="@drawable/login_edit_text"
                 android:ems="10"
                 android:hint="@string/glassTextField"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingLeft="8dp"
+                android:textColor="@color/primaryColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,17 +127,21 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="@string/smallGlassSwitcher" />
+                android:text="@string/smallGlassSwitcher"
+                android:textColor="@color/secondaryColor" />
 
             <EditText
                 android:id="@+id/sgEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
+                android:background="@drawable/login_edit_text"
                 android:ems="10"
                 android:hint="@string/glassTextField"
                 android:inputType="number"
+                android:paddingLeft="8dp"
+                android:textColor="@color/primaryColor"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -132,7 +149,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -141,7 +158,9 @@
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/addHarvButton" />
+            android:background="@drawable/radius_button"
+            android:text="@string/addHarvButton"
+            android:textColor="@color/primaryColor" />
 
     </LinearLayout>
 

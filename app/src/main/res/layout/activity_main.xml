@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/primaryColor"
     android:visibility="visible">
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:background="@drawable/login_edit_text"
         android:ems="10"
         android:hint="@string/act_main_name"
         android:inputType="textPersonName"
-        android:textColor="@color/secondaryColor"
+        android:paddingLeft="8dp"
+        android:textColor="@color/primaryColor"
         android:textColorHint="@color/primaryText"
         android:textColorLink="@color/secondaryColor" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/login_edit_text"
         android:ems="10"
         android:hint="@string/act_main_password"
         android:inputType="textPassword"
-        android:textColor="@color/secondaryColor"
+        android:paddingLeft="8dp"
+        android:textColor="@color/primaryColor"
         android:textColorHint="@color/primaryText"
         android:textColorLink="@color/secondaryColor" />
 
@@ -44,6 +47,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/radius_button"
         android:text="@string/act_main_loginbtn" />
 </LinearLayout>
 

@@ -24,4 +24,19 @@
     <string name="bigGlassSwitcher">Duże słoiki?</string>
     <string name="smallGlassSwitcher">Małe słoiki?</string>
     <!---End of AddHarvestActivity-->
+
+    <!--OrderActivity-->
+    <string name="act_order_whatToSell">Co sprzedajemy?</string>
+    <string name="act_order_canSell">Pozostało do sprzedaży</string>
+    <string name="act_order_big_glasses_label">Dużych słoików</string>
+    <string name="act_order_small_glasses_label">Małych słoików</string>
+    <string name="act_order_quantity">Ilość</string>
+    <string name="act_order_amount">Kwota</string>
+    <string name="act_order_currency">zł</string>
+    <string name="act_order_switcher_custom_price">Niestandardowa cena?</string>
+    <string name="act_order_customer_name">Nazwa kupującego</string>
+    <string name="act_orderd_summary_label">Suma: </string>
+    <string name="act_order_default_price">0</string>
+    <string name="act_order_add_button">Dodaj do koszyka</string>
+    <!--End of OrderActivity-->
 </resources>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".OrderActivity">
+
+    <LinearLayout
+        android:id="@+id/sale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/act_order_whatToSell"
+            android:textColor="@color/secondaryColor" />
+
+        <Spinner
+            android:id="@+id/orderHoneySpinner"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/act_addHarvest_spinner" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/secondaryColor" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/twCanSell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/act_order_canSell"
+            android:textColor="@color/secondaryColor" />
+
+        <LinearLayout
+            android:id="@+id/glasses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/bBlass"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/bgLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/act_order_big_glasses_label"
+                    android:textColor="@color/secondaryColor" />
+
+                <TextView
+                    android:id="@+id/textBigGlass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="0"
+                    android:textColor="@color/secondaryColor" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sGlass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/sgLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/act_order_small_glasses_label"
+                    android:textColor="@color/secondaryColor" />
+
+                <TextView
+                    android:id="@+id/textSmallGlass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="0"
+                    android:textColor="@color/secondaryColor" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/secondaryColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/twQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="@string/act_order_quantity"
+            android:textColor="@color/secondaryColor" />
+
+        <EditText
+            android:id="@+id/textQuantity"
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_edit_text"
+            android:ems="10"
+            android:hint="0"
+            android:inputType="number"
+            android:paddingLeft="8dp"
+            android:text="1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/twAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="@string/act_order_amount"
+            android:textColor="@color/secondaryColor" />
+
+        <EditText
+            android:id="@+id/textAmount"
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_edit_text"
+            android:editable="true"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="0"
+            android:inputType="number"
+            android:paddingLeft="8dp"
+            android:textColor="@color/secondaryColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/twCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="@string/act_order_currency"
+            android:textColor="@color/secondaryColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/switcherPrice"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/act_order_switcher_custom_price"
+            android:textColor="@color/secondaryColor" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/twSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/act_order_customer_name"
+                android:textColor="@color/secondaryColor"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/twDefaultPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/act_order_add_button"
+                android:textColor="@color/secondaryColor"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -4,11 +4,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bhren.myapplication.Model.Harvest;
@@ -61,6 +64,19 @@ public class AddHarvestActivity extends AppCompatActivity {
         btnAddHarv.setOnClickListener(v -> {
             setHoney();
         });
+
+
+        honeySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setDefault();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     //Adding kilograms, small and/or big glasses to Firebase
@@ -100,6 +116,8 @@ public class AddHarvestActivity extends AppCompatActivity {
                     summarySmallGlasses = oldSmallGlasses + currentSmallGlasses;
                     Harvest setHarvest = new Harvest(Integer.toString(summaryKilo), Integer.toString(summaryBigGlasses), Integer.toString(summarySmallGlasses));
                     addHarvRef.setValue(setHarvest);
+                    Toast.makeText(AddHarvestActivity.this, "Dodano do zbioru", Toast.LENGTH_SHORT).show();
+                    setDefault();
                 } else {
                     Toast.makeText(AddHarvestActivity.this, "Nie mamy takiego moidu w składzie", Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +129,12 @@ public class AddHarvestActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setDefault(){
+        etSmallGlasses.setText("0");
+        etBigGlasses.setText("0");
+        etKilo.setText("0");
     }
 
     private void switchers() {
