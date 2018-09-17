@@ -1,5 +1,6 @@
 package com.example.bhren.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ public class Fragment2 extends Fragment {
     List<TempOrder> tempOrderData;
     ArrayList<String> indexList;
     private RecyclerView order_recycler;
+    Context c;
 
     @Nullable
     @Override

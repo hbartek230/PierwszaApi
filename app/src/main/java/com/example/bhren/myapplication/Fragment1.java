@@ -41,7 +41,6 @@ public class Fragment1 extends Fragment {
     private Switch switcherPrice;
     private Button btnAddToCart;
     private int singlePrice;
-    int currentId=1;
 
     @Nullable
     @Override
@@ -135,7 +134,6 @@ public class Fragment1 extends Fragment {
                 if (etCustName.getText().toString().isEmpty()) {
                     Toast.makeText(getActivity(), "Nie wprowadzono nazwy kupującego", Toast.LENGTH_SHORT).show();
                 } else {
-                    currentId += 1;
                     TempOrder setToCart = new TempOrder(twSummary.getText().toString(), honeySpinner.getSelectedItem().toString(), twQuantity.getText().toString());
                     addCartRef.setValue(setToCart);
                 }
