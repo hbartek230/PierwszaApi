@@ -6,23 +6,26 @@ import android.os.Bundle;
 import android.widget.Button;
 
 public class SecondActivity extends AppCompatActivity {
-    private Button AddHarvest;
-    private Button AddSell;
+    private Button btnAddHarvest;
+    private Button btnAddSell;
+    private Button btnViewHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        AddHarvest = findViewById(R.id.btnAddHarvest);
-        AddSell = findViewById(R.id.btnAddSell);
+        btnAddHarvest = findViewById(R.id.btnAddHarvest);
+        btnAddSell = findViewById(R.id.btnAddSell);
+        btnViewHistory = findViewById(R.id.btnViewHistory);
 
-        AddHarvest.setOnClickListener((v)->{
+
+        btnAddHarvest.setOnClickListener((v)->{
             startActivity(new Intent(SecondActivity.this, AddHarvestActivity.class));
                 }
         );
 
-        AddSell.setOnClickListener((v -> {
-            startActivity(new Intent(SecondActivity.this, tabbedTest.class));
+        btnAddSell.setOnClickListener((v -> {
+            startActivity(new Intent(SecondActivity.this, TestActivity.class));
         }));
 
         }

@@ -30,7 +30,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <!---End of AddHarvestActivity-->
 
-    <!--OrderActivity-->
+    <!--Fragment1Activity-->
     <string name="act_order_whatToSell">What to Sell?</string>
     <string name="act_order_canSell">You can sell:</string>
     <string name="act_order_big_glasses_label">Big Glasses</string>
@@ -41,5 +41,8 @@
     <string name="act_order_switcher_custom_price">Custom price?</string>
     <string name="act_order_customer_name">Customer name</string>
     <string name="act_order_add_button">Add to Cart</string>
-    <!--End of OrderActivity-->
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_order_tab">OrderTab</string>
+    <string name="title_activity_test">TestActivity</string>
+    <!--End of Fragment1Activity-->
 </resources>

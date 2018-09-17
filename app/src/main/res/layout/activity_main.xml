@@ -21,7 +21,8 @@
         android:paddingLeft="8dp"
         android:textColor="@color/primaryColor"
         android:textColorHint="@color/primaryText"
-        android:textColorLink="@color/secondaryColor" />
+        android:textColorLink="@color/primaryColor"
+        android:textCursorDrawable="@null" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -38,7 +39,8 @@
         android:paddingLeft="8dp"
         android:textColor="@color/primaryColor"
         android:textColorHint="@color/primaryText"
-        android:textColorLink="@color/secondaryColor" />
+        android:textColorLink="@color/secondaryColor"
+        android:textCursorDrawable="@null" />
 
     <Button
         android:id="@+id/btnLogin"

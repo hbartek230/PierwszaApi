@@ -2,11 +2,15 @@ package com.example.bhren.myapplication;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -15,37 +19,43 @@ import android.widget.Toast;
 
 import com.example.bhren.myapplication.Model.Amount;
 import com.example.bhren.myapplication.Model.Harvest;
+import com.example.bhren.myapplication.Model.TempOrder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class OrderActivity extends AppCompatActivity {
-
+public class Fragment1 extends Fragment {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference table_harvest = database.getReference("Harvest");
     final DatabaseReference table_amount = database.getReference("Amount");
+    final DatabaseReference table_temporder = database.getReference("TempOrder");
     private TextView twBigGlass;
     private TextView twSmallGlass;
     private EditText twAmount;
     private TextView twSummary;
     private EditText twQuantity;
+    private EditText etCustName;
     private Spinner honeySpinner;
     private Switch switcherPrice;
+    private Button btnAddToCart;
     private int singlePrice;
+    int currentId=1;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
-        twBigGlass = findViewById(R.id.textBigGlass);
-        twSmallGlass = findViewById(R.id.textSmallGlass);
-        honeySpinner = findViewById(R.id.orderHoneySpinner);
-        twAmount = findViewById(R.id.textAmount);
-        twQuantity = findViewById(R.id.textQuantity);
-        switcherPrice = findViewById(R.id.switcherPrice);
-        twSummary = findViewById(R.id.twSummary);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View fragmentView = inflater.inflate(R.layout.fragment_frag1, container, false);
+        twBigGlass = fragmentView.findViewById(R.id.textBigGlass);
+        twSmallGlass = fragmentView.findViewById(R.id.textSmallGlass);
+        honeySpinner = fragmentView.findViewById(R.id.orderHoneySpinner);
+        twAmount = fragmentView.findViewById(R.id.textAmount);
+        twQuantity = fragmentView.findViewById(R.id.textQuantity);
+        switcherPrice = fragmentView.findViewById(R.id.switcherPrice);
+        twSummary = fragmentView.findViewById(R.id.twDefaultPrice);
+        btnAddToCart = fragmentView.findViewById(R.id.btnAddToCart);
+        etCustName = fragmentView.findViewById(R.id.etCustName);
 
         getGlasses();
         getAmount();
@@ -93,7 +103,7 @@ public class OrderActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!twAmount.getText().toString().isEmpty()) {
                     setPrice();
-                }else{
+                } else {
                     twSummary.setText("0");
                 }
             }
@@ -103,6 +113,41 @@ public class OrderActivity extends AppCompatActivity {
 
             }
         });
+
+        btnAddToCart.setOnClickListener(v -> {
+            addToCart();
+        });
+
+        return fragmentView;
+    }
+
+    private void addToCart() {
+        table_temporder.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DatabaseReference addCartRef = table_temporder.push();
+                if (twQuantity.getText().toString().isEmpty() || twQuantity.getText().toString().equals("0")) {
+                    Toast.makeText(getActivity(), "Nie wprowadzono ilości", Toast.LENGTH_SHORT).show();
+                }
+                if (twAmount.getText().toString().isEmpty() || twAmount.getText().toString().equals("0")) {
+                    Toast.makeText(getActivity(), "Nie wprowadzono kwoty", Toast.LENGTH_SHORT).show();
+                }
+                if (etCustName.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Nie wprowadzono nazwy kupującego", Toast.LENGTH_SHORT).show();
+                } else {
+                    currentId += 1;
+                    TempOrder setToCart = new TempOrder(twSummary.getText().toString(), honeySpinner.getSelectedItem().toString(), twQuantity.getText().toString());
+                    addCartRef.setValue(setToCart);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void getGlasses() {
@@ -133,7 +178,7 @@ public class OrderActivity extends AppCompatActivity {
                     twAmount.setText(amount.getAmount());
                     singlePrice = Integer.parseInt(amount.getAmount());
                 } else {
-                    Toast.makeText(OrderActivity.this, "Oups..Takiego miodu nie ma w bazie", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Oups..Takiego miodu nie ma w bazie", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -186,5 +231,5 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
-
 }
+

@@ -25,7 +25,7 @@
     <string name="smallGlassSwitcher">Małe słoiki?</string>
     <!---End of AddHarvestActivity-->
 
-    <!--OrderActivity-->
+    <!--Fragment1Activity-->
     <string name="act_order_whatToSell">Co sprzedajemy?</string>
     <string name="act_order_canSell">Pozostało do sprzedaży</string>
     <string name="act_order_big_glasses_label">Dużych słoików</string>
@@ -38,5 +38,5 @@
     <string name="act_orderd_summary_label">Suma: </string>
     <string name="act_order_default_price">0</string>
     <string name="act_order_add_button">Dodaj do koszyka</string>
-    <!--End of OrderActivity-->
+    <!--End of Fragment1Activity-->
 </resources>
