@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -230,20 +232,6 @@
                     android:textColor="@color/secondaryColor"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/etCustName"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/login_edit_text"
-                android:ems="10"
-                android:hint="@string/act_order_customer_name"
-                android:inputType="textPersonName"
-                android:paddingLeft="8dp"
-                android:textCursorDrawable="@null"
-                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnAddToCart"

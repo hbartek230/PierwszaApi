@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.bhren.myapplication.Common.TempOrderBill;
+import com.example.bhren.myapplication.Inteface.OrderClickListener;
 import com.example.bhren.myapplication.Model.TempOrder;
 import com.example.bhren.myapplication.ViewHolder.OrderAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -24,15 +26,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment2 extends Fragment {
+public class Fragment2 extends Fragment implements OrderClickListener {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference recyclerRef = database.getReference("TempOrder");
     OrderAdapter adapter;
-    List<TempOrder> tempOrderData;
-    ArrayList<String> indexList;
-    private RecyclerView order_recycler;
+    List<TempOrderBill> tempOrderData;
     Context c;
+    private int index;
+    private RecyclerView order_recycler;
 
     @Nullable
     @Override
@@ -46,41 +48,36 @@ public class Fragment2 extends Fragment {
         order_recycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         tempOrderData = new ArrayList<>();
-        indexList = new ArrayList<String>();
-        adapter = new OrderAdapter(tempOrderData);
-        GetFirebaseData();
+        adapter = new OrderAdapter(tempOrderData, this);
+        getFirebaseData();
 
         return fragmentView;
     }
 
 
-    public void GetFirebaseData() {
+    public void getFirebaseData() {
         recyclerRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TempOrder getData = dataSnapshot.getValue(TempOrder.class);
-                tempOrderData.add(getData);
-                indexList.add(dataSnapshot.getKey());
+                TempOrder tempOrderItem = dataSnapshot.getValue(TempOrder.class);
+                tempOrderData.add(new TempOrderBill(dataSnapshot.getKey(), tempOrderItem));
                 order_recycler.setAdapter(adapter);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TempOrder getData = dataSnapshot.getValue(TempOrder.class);
-                String key = dataSnapshot.getKey();
-                int index = indexList.indexOf(key);
-                tempOrderData.set(index, getData);
+                TempOrder tempOrderItem = dataSnapshot.getValue(TempOrder.class);
+                tempOrderData.set(index, (new TempOrderBill(dataSnapshot.getKey(), tempOrderItem)));
                 adapter.notifyDataSetChanged();
                 order_recycler.setAdapter(adapter);
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                String key = dataSnapshot.getKey();
-                int index = indexList.indexOf(key);
+                findChildKey(dataSnapshot.getKey());
+                System.out.println("Index: " + index);
                 if (index != -1) {
                     tempOrderData.remove(index);
-                    indexList.remove(index);
                     adapter.notifyDataSetChanged();
                     order_recycler.setAdapter(adapter);
                 }
@@ -98,12 +95,22 @@ public class Fragment2 extends Fragment {
         });
     }
 
-    public void refreshData(DataSnapshot firebaseSnapshot) {
-        if (firebaseSnapshot.exists()) {
-            for (DataSnapshot childSnapshot : firebaseSnapshot.getChildren()) {
-                TempOrder data = childSnapshot.getValue(TempOrder.class);
-                tempOrderData.add(data);
-            }
+    private int findChildKey(String key) {
+        for (int i = 0; i < tempOrderData.size(); i++) {
+            if (tempOrderData.get(i).getKey().equals(key))
+                index = i;
+
         }
+        return index;
+    }
+
+    public void deleteFromFirebase(String key) {
+        recyclerRef.child(key).removeValue();
+
+    }
+
+    @Override
+    public void onOrderDelete(String key) {
+        deleteFromFirebase(key);
     }
 }

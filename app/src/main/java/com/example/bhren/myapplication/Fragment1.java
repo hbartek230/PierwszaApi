@@ -36,7 +36,6 @@ public class Fragment1 extends Fragment {
     private EditText twAmount;
     private TextView twSummary;
     private EditText twQuantity;
-    private EditText etCustName;
     private Spinner honeySpinner;
     private Switch switcherPrice;
     private Button btnAddToCart;
@@ -54,7 +53,6 @@ public class Fragment1 extends Fragment {
         switcherPrice = fragmentView.findViewById(R.id.switcherPrice);
         twSummary = fragmentView.findViewById(R.id.twDefaultPrice);
         btnAddToCart = fragmentView.findViewById(R.id.btnAddToCart);
-        etCustName = fragmentView.findViewById(R.id.etCustName);
 
         getGlasses();
         getAmount();
@@ -130,12 +128,10 @@ public class Fragment1 extends Fragment {
                 }
                 if (twAmount.getText().toString().isEmpty() || twAmount.getText().toString().equals("0")) {
                     Toast.makeText(getActivity(), "Nie wprowadzono kwoty", Toast.LENGTH_SHORT).show();
-                }
-                if (etCustName.getText().toString().isEmpty()) {
-                    Toast.makeText(getActivity(), "Nie wprowadzono nazwy kupującego", Toast.LENGTH_SHORT).show();
                 } else {
                     TempOrder setToCart = new TempOrder(twSummary.getText().toString(), honeySpinner.getSelectedItem().toString(), twQuantity.getText().toString());
                     addCartRef.setValue(setToCart);
+                    Toast.makeText(getContext(), "Dodano do zamównienia", Toast.LENGTH_SHORT).show();
                 }
 
             }
