@@ -39,4 +39,16 @@
     <string name="act_order_default_price">0</string>
     <string name="act_order_add_button">Dodaj do koszyka</string>
     <!--End of Fragment1Activity-->
+
+    <!--UpdateDialogActivity-->
+    <string name="act_update_title">Edycja zamówienia</string>
+    <string name="act_update_quantity_title">Ilość</string>
+    <string name="act_update_current_quantity">Obecna ilość: </string>
+    <string name="act_update_new_quantity">Nowa ilość: </string>
+    <string name="act_update_price_title">Cena</string>
+    <string name="act_update_current_price">Obecna cena: </string>
+    <string name="act_update_new_price">Nowa cena: </string>
+    <string name="act_update_siwtcher_price">Zmiana ceny?</string>
+    <string name="act_update_btn_save">Zapisz zmiany</string>
+    <!--End of UpdateDialogActivity-->
 </resources>

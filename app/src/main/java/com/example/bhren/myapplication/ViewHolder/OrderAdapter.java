@@ -23,6 +23,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnCreateCo
     TextView twOrderQuantity;
     TextView twOrderPrice;
     ImageView imageDelete;
+    ImageView imageEdit;
     OrderClickListener listener;
 
 
@@ -33,6 +34,8 @@ class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnCreateCo
         twOrderQuantity = (TextView) itemView.findViewById(R.id.twOrderQuantity);
         twOrderPrice = (TextView) itemView.findViewById(R.id.twOrderPrice);
         imageDelete = (ImageView) itemView.findViewById(R.id.imageDelete);
+        imageEdit = (ImageView) itemView.findViewById(R.id.imageEdit);
+
         itemView.setOnCreateContextMenuListener(this);
 
     }
@@ -90,6 +93,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
                 listener.onOrderDelete(firebaseData.getKey());
             }
         });
+
+        holder.imageEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String currentQuantity = holder.twOrderQuantity.getText().toString();
+                String currentPrice = holder.twOrderPrice.getText().toString();
+                System.out.println("Quantity: "+holder.twOrderQuantity.getText().toString());
+                System.out.println("Price: "+holder.twOrderPrice.getText().toString());
+                listener.onOrderEdit(currentQuantity, currentPrice);
+            }
+        });
+
 
     }
 

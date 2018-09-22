@@ -40,9 +40,22 @@
     <string name="act_order_currency">€</string>
     <string name="act_order_switcher_custom_price">Custom price?</string>
     <string name="act_order_customer_name">Customer name</string>
+    <string name="act_orderd_summary_label">Suma: </string>
+    <string name="act_order_default_price">0</string>
     <string name="act_order_add_button">Add to Cart</string>
+
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_order_tab">OrderTab</string>
     <string name="title_activity_test">TestActivity</string>
     <!--End of Fragment1Activity-->
+
+    <string name="act_update_title">Order Edit</string>
+    <string name="act_update_quantity_title">Quantity</string>
+    <string name="act_update_current_quantity">Current quantity: </string>
+    <string name="act_update_new_quantity">New quantity: </string>
+    <string name="act_update_price_title">Price</string>
+    <string name="act_update_current_price">Current price: </string>
+    <string name="act_update_new_price">New price: </string>
+    <string name="act_update_siwtcher_price">Change price?</string>
+    <string name="act_update_btn_save">Save chenges</string>
 </resources>

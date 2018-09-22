@@ -1,5 +1,6 @@
 package com.example.bhren.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.Inteface.OrderClickListener;
@@ -112,5 +115,28 @@ public class Fragment2 extends Fragment implements OrderClickListener {
     @Override
     public void onOrderDelete(String key) {
         deleteFromFirebase(key);
+    }
+
+    public void showUpdateDialog(String currentQuantity, String currentPrice) {
+
+        AlertDialog.Builder buildDialog = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View showDialog = inflater.inflate(R.layout.update_dialog, null);
+        buildDialog.setView(showDialog);
+
+        final TextView twCurrentQuantity = (TextView) showDialog.findViewById(R.id.twCurrentQuantity);
+        final TextView twCurrentPrice = (TextView) showDialog.findViewById(R.id.twCurrentPrice);
+        final Button btnSave = (Button) showDialog.findViewById(R.id.btnSave);
+
+        twCurrentQuantity.setText(currentQuantity);
+        twCurrentPrice.setText(currentPrice);
+
+        AlertDialog updateDialog = buildDialog.create();
+        updateDialog.show();
+
+    }
+
+    public void onOrderEdit(String currentQuantity, String currentPrice){
+        showUpdateDialog(currentQuantity, currentPrice);
     }
 }
