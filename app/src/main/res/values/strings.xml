@@ -49,6 +49,10 @@
     <string name="title_activity_test">TestActivity</string>
     <!--End of Fragment1Activity-->
 
+    <!--Fragment2Activity-->
+    <string name="act_order_bill_summary">Summary: </string>
+    <!--End of Fragment2Activity-->
+
     <string name="act_update_title">Order Edit</string>
     <string name="act_update_quantity_title">Quantity</string>
     <string name="act_update_current_quantity">Current quantity: </string>

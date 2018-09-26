@@ -41,7 +41,7 @@
                         android:id="@+id/twSum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Suma: "
+                        android:text="@string/act_order_bill_summary"
                         android:textColor="@color/secondaryColor"
                         android:textSize="20sp" />
 
@@ -49,8 +49,8 @@
                         android:id="@+id/twPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000 zł"
                         android:textColor="@color/secondaryColor"
+                        android:layout_marginLeft="5dp"
                         android:textSize="20sp" />
 
                 </LinearLayout>

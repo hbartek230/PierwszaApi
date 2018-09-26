@@ -45,6 +45,7 @@ public class Fragment2 extends Fragment implements OrderClickListener {
     private RecyclerView order_recycler;
     private TextView twCurrentQuantity;
     private TextView twCurrentPrice;
+    private TextView priceLabel;
     private EditText etNewQuantity;
     private EditText etNewPrice;
     private Button btnSave;
@@ -64,10 +65,12 @@ public class Fragment2 extends Fragment implements OrderClickListener {
         order_recycler.setLayoutManager(rlm);
         order_recycler.setItemAnimator(new DefaultItemAnimator());
         order_recycler.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        priceLabel = fragmentView.findViewById(R.id.twPrice);
 
         tempOrderData = new ArrayList<>();
         adapter = new OrderAdapter(tempOrderData, this);
         order_recycler.setAdapter(adapter);
+        priceLabel.setText("0");
         getFirebaseData();
 
         return fragmentView;
@@ -81,6 +84,7 @@ public class Fragment2 extends Fragment implements OrderClickListener {
                 TempOrder tempOrderItem = dataSnapshot.getValue(TempOrder.class);
                 tempOrderData.add(new TempOrderBill(dataSnapshot.getKey(), tempOrderItem));
                 adapter.notifyDataSetChanged();
+                setSummaryLabel();
             }
 
             @Override
@@ -89,6 +93,7 @@ public class Fragment2 extends Fragment implements OrderClickListener {
                 TempOrder tempOrderItem = dataSnapshot.getValue(TempOrder.class);
                 tempOrderData.set(index, (new TempOrderBill(dataSnapshot.getKey(), tempOrderItem)));
                 adapter.notifyDataSetChanged();
+                setSummaryLabel();
             }
 
             @Override
@@ -97,6 +102,7 @@ public class Fragment2 extends Fragment implements OrderClickListener {
                 if (index != -1) {
                     tempOrderData.remove(index);
                     adapter.notifyDataSetChanged();
+                    setSummaryLabel();
                 }
             }
 
@@ -119,6 +125,16 @@ public class Fragment2 extends Fragment implements OrderClickListener {
             }
         }
         return index;
+    }
+
+    private void setSummaryLabel(){
+        int currentPrice = 0;
+        int databasePrice;
+        for(int i=0; i<tempOrderData.size(); i++){
+            databasePrice = Integer.parseInt(tempOrderData.get(i).getTempOrder().getAmount());
+            currentPrice+=databasePrice;
+        }
+        priceLabel.setText(Integer.toString(currentPrice));
     }
 
     public void deleteFromFirebase(String key) {

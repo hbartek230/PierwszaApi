@@ -40,6 +40,10 @@
     <string name="act_order_add_button">Dodaj do koszyka</string>
     <!--End of Fragment1Activity-->
 
+    <!--Fragment2Activity-->
+    <string name="act_order_bill_summary">Suma: </string>
+    <!--End of Fragment2Activity-->
+
     <!--UpdateDialogActivity-->
     <string name="act_update_title">Edycja zamówienia</string>
     <string name="act_update_quantity_title">Ilość</string>
