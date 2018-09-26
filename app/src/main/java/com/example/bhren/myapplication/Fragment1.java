@@ -17,7 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bhren.myapplication.Model.Amount;
+import com.example.bhren.myapplication.GeneralMethods.OrderMethods;
 import com.example.bhren.myapplication.Model.Harvest;
 import com.example.bhren.myapplication.Model.TempOrder;
 import com.google.firebase.database.DataSnapshot;
@@ -27,19 +27,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Fragment1 extends Fragment {
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    final DatabaseReference table_harvest = database.getReference("Harvest");
-    final DatabaseReference table_amount = database.getReference("Amount");
-    final DatabaseReference table_temporder = database.getReference("TempOrder");
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final DatabaseReference table_harvest = database.getReference("Harvest");
+    private final DatabaseReference table_temporder = database.getReference("TempOrder");
+    OrderMethods controller = new OrderMethods();
+    private Spinner honeySpinner;
     private TextView twBigGlass;
     private TextView twSmallGlass;
     private EditText twAmount;
     private TextView twSummary;
     private EditText twQuantity;
-    private Spinner honeySpinner;
     private Switch switcherPrice;
     private Button btnAddToCart;
-    private int singlePrice;
 
     @Nullable
     @Override
@@ -81,7 +80,9 @@ public class Fragment1 extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setPrice();
+                if (!twAmount.getText().toString().isEmpty()) {
+                    setSummaryPrice();
+                }
             }
 
             @Override
@@ -99,7 +100,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!twAmount.getText().toString().isEmpty()) {
-                    setPrice();
+                    setSummaryPrice();
                 } else {
                     twSummary.setText("0");
                 }
@@ -164,27 +165,10 @@ public class Fragment1 extends Fragment {
     }
 
     public void getAmount() {
-        table_amount.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(honeySpinner.getSelectedItem().toString()).exists()) {
-                    Amount amount = dataSnapshot.child(honeySpinner.getSelectedItem().toString()).getValue(Amount.class);
-                    twAmount.setText(amount.getAmount());
-                    singlePrice = Integer.parseInt(amount.getAmount());
-                } else {
-                    Toast.makeText(getActivity(), "Oups..Takiego miodu nie ma w bazie", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        controller.getHoneyAmount(amount -> twAmount.setText(amount), honeySpinner.getSelectedItem().toString());
     }
 
-    public void setPrice() {
+    public void setSummaryPrice() {
         if (twQuantity.getText().toString().isEmpty()) {
             if (switcherPrice.isChecked()) {
                 twSummary.setText("0");
@@ -194,25 +178,12 @@ public class Fragment1 extends Fragment {
             }
 
         } else {
-            returnPrice();
+            twSummary.setText(Integer.toString(controller
+                    .returnOrderPrice(Integer.parseInt(String.valueOf(twAmount.getText().toString()))
+                            , Integer.parseInt(String.valueOf(twQuantity.getText().toString())))));
         }
     }
 
-    public void returnPrice() {
-        if (switcherPrice.isChecked()) {
-            int quantity = Integer.parseInt(String.valueOf(twQuantity.getText().toString()));
-            int singlePr = Integer.parseInt(String.valueOf(twAmount.getText().toString().trim()));
-            int summaryPrice;
-            summaryPrice = quantity * singlePr;
-            twSummary.setText(Integer.toString(summaryPrice));
-        } else {
-            int quantity = Integer.parseInt(String.valueOf(twQuantity.getText().toString()));
-            int singlePr = singlePrice;
-            int summaryPrice;
-            summaryPrice = quantity * singlePr;
-            twSummary.setText(Integer.toString(summaryPrice));
-        }
-    }
 
     public void customPrice() {
         switcherPrice.setOnCheckedChangeListener((buttonView, isChecked) -> {

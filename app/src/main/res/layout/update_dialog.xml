@@ -95,14 +95,14 @@
                     android:textColor="@color/secondaryColor" />
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/etNewQuantity"
                     android:layout_width="75dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/login_edit_text"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:paddingLeft="8dp" />
 
             </LinearLayout>
@@ -144,7 +144,7 @@
                     android:textSize="16sp" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/changePriceSwitcher"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -191,14 +191,15 @@
                     android:textColor="@color/secondaryColor" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/etNewPrice"
                     android:layout_width="75dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/login_edit_text"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:enabled="false"
+                    android:inputType="number"
                     android:paddingLeft="8dp" />
 
             </LinearLayout>

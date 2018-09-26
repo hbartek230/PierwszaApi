@@ -1,16 +1,12 @@
 package com.example.bhren.myapplication.ViewHolder;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.Inteface.OrderClickListener;
@@ -18,7 +14,7 @@ import com.example.bhren.myapplication.R;
 
 import java.util.List;
 
-class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, PopupMenu.OnMenuItemClickListener {
+class OrderViewHolder extends RecyclerView.ViewHolder {
     TextView twOrderItem;
     TextView twOrderQuantity;
     TextView twOrderPrice;
@@ -36,30 +32,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnCreateCo
         imageDelete = (ImageView) itemView.findViewById(R.id.imageDelete);
         imageEdit = (ImageView) itemView.findViewById(R.id.imageEdit);
 
-        itemView.setOnCreateContextMenuListener(this);
-
     }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        PopupMenu item_menu = new PopupMenu(v.getContext(), v);
-        item_menu.getMenuInflater().inflate(R.menu.bill_context_menu, item_menu.getMenu());
-        item_menu.setOnMenuItemClickListener(this);
-        item_menu.show();
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        if (item.getItemId() == R.id.bill_item_delete) {
-            Toast.makeText(itemView.getContext(), "Usuwanie", Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(itemView.getContext(), "Edycja", Toast.LENGTH_SHORT).show();
-
-        }
-        return true;
-    }
-
 }
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
@@ -87,24 +60,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         holder.twOrderQuantity.setText(firebaseData.getTempOrder().getQuantity());
         holder.twOrderPrice.setText(firebaseData.getTempOrder().getAmount());
 
-        holder.imageDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onOrderDelete(firebaseData.getKey());
-            }
-        });
+        holder.imageDelete.setOnClickListener(v -> listener.onOrderDelete(firebaseData.getKey()));
 
-        holder.imageEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String currentQuantity = holder.twOrderQuantity.getText().toString();
-                String currentPrice = holder.twOrderPrice.getText().toString();
-                System.out.println("Quantity: "+holder.twOrderQuantity.getText().toString());
-                System.out.println("Price: "+holder.twOrderPrice.getText().toString());
-                listener.onOrderEdit(currentQuantity, currentPrice);
-            }
-        });
-
+        holder.imageEdit.setOnClickListener(v -> listener.onOrderEdit(holder.twOrderItem.getText().toString(), firebaseData.getKey(), holder.twOrderQuantity.getText().toString(), holder.twOrderPrice.getText().toString()));
 
     }
 
