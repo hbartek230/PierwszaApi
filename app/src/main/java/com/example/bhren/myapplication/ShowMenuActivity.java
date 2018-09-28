@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class SecondActivity extends AppCompatActivity {
+public class ShowMenuActivity extends AppCompatActivity {
     private Button btnAddHarvest;
     private Button btnAddSell;
     private Button btnViewHistory;
@@ -20,12 +20,12 @@ public class SecondActivity extends AppCompatActivity {
 
 
         btnAddHarvest.setOnClickListener((v)->{
-            startActivity(new Intent(SecondActivity.this, AddHarvestActivity.class));
+            startActivity(new Intent(ShowMenuActivity.this, AddHarvestActivity.class));
                 }
         );
 
         btnAddSell.setOnClickListener((v -> {
-            startActivity(new Intent(SecondActivity.this, TestActivity.class));
+            startActivity(new Intent(ShowMenuActivity.this, OrderActivity.class));
         }));
 
         }

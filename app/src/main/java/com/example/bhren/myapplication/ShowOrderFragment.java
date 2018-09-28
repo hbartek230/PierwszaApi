@@ -34,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment2 extends Fragment implements OrderClickListener {
+public class ShowOrderFragment extends Fragment implements OrderClickListener {
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final DatabaseReference recyclerRef = database.getReference("TempOrder");

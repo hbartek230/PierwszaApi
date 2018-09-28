@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Fragment1 extends Fragment {
+public class MakeOrderFragment extends Fragment {
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     private final DatabaseReference table_harvest = database.getReference("Harvest");
     private final DatabaseReference table_temporder = database.getReference("TempOrder");

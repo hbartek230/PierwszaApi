@@ -21,11 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".ShowMenuActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".AddHarvestActivity" />
         <activity
-            android:name=".TestActivity"
+            android:name=".OrderActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme"></activity>
     </application>

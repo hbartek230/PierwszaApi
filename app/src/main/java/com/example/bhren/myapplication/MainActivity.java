@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             Users user = dataSnapshot.child(etName.getText().toString()).getValue(Users.class);
                             if (user.getPassword().equals(etPassword.getText().toString())) {
                                 Toast.makeText(MainActivity.this, "Login poprawny", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                                startActivity(new Intent(MainActivity.this, ShowMenuActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(MainActivity.this, "Login niepoprawny", Toast.LENGTH_SHORT).show();
