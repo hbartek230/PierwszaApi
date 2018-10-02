@@ -51,6 +51,7 @@
 
     <!--Fragment2Activity-->
     <string name="act_order_bill_summary">Summary: </string>
+    <string name="act_order_bill_summary_currency">%1$d USD</string>
     <!--End of Fragment2Activity-->
 
     <string name="act_update_title">Order Edit</string>

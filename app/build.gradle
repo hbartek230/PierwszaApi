@@ -10,6 +10,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
     buildTypes {
         release {
@@ -38,6 +43,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.2'
     implementation 'com.firebaseui:firebase-ui-database:4.2.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    compileOnly 'org.projectlombok:lombok:1.16.18'
+    annotationProcessor 'org.projectlombok:lombok:1.16.18'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 apply plugin: 'com.google.gms.google-services'

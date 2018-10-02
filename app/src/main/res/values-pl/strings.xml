@@ -42,6 +42,7 @@
 
     <!--Fragment2Activity-->
     <string name="act_order_bill_summary">Suma: </string>
+    <string name="act_order_bill_summary_currency">%1$d PLN</string>
     <!--End of Fragment2Activity-->
 
     <!--UpdateDialogActivity-->
@@ -54,5 +55,6 @@
     <string name="act_update_new_price">Nowa cena: </string>
     <string name="act_update_siwtcher_price">Zmiana ceny?</string>
     <string name="act_update_btn_save">Zapisz zmiany</string>
+
     <!--End of UpdateDialogActivity-->
 </resources>

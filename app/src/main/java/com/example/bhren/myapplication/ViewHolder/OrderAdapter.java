@@ -12,6 +12,7 @@ import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.Inteface.OrderClickListener;
 import com.example.bhren.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class OrderViewHolder extends RecyclerView.ViewHolder {
@@ -36,12 +37,16 @@ class OrderViewHolder extends RecyclerView.ViewHolder {
 }
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
-    List<TempOrderBill> tempOrderList;
+    private List<TempOrderBill> tempOrderList = new ArrayList<>();
     private OrderClickListener listener;
 
-    public OrderAdapter(List<TempOrderBill> tempOrderList, OrderClickListener listener) {
-        this.tempOrderList = tempOrderList;
+    public OrderAdapter(OrderClickListener listener) {
         this.listener = listener;
+    }
+
+    public void setItems(List<TempOrderBill> tempOrderList){
+        this.tempOrderList = tempOrderList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,15 +59,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        TempOrderBill firebaseData = tempOrderList.get(position);
+        TempOrderBill tempOrderBill = tempOrderList.get(position);
 
-        holder.twOrderItem.setText(firebaseData.getTempOrder().getKind());
-        holder.twOrderQuantity.setText(firebaseData.getTempOrder().getQuantity());
-        holder.twOrderPrice.setText(firebaseData.getTempOrder().getAmount());
+        holder.twOrderItem.setText(tempOrderBill.getTempOrder().getKind());
+        holder.twOrderQuantity.setText(tempOrderBill.getTempOrder().getQuantity());
+        holder.twOrderPrice.setText(tempOrderBill.getTempOrder().getAmount());
 
-        holder.imageDelete.setOnClickListener(v -> listener.onOrderDelete(firebaseData.getKey()));
+        holder.imageDelete.setOnClickListener(v ->
+                listener.onOrderDelete(tempOrderBill));
 
-        holder.imageEdit.setOnClickListener(v -> listener.onOrderEdit(holder.twOrderItem.getText().toString(), firebaseData.getKey(), holder.twOrderQuantity.getText().toString(), holder.twOrderPrice.getText().toString()));
+        holder.imageEdit.setOnClickListener(v ->
+                listener.onOrderEdit(tempOrderBill));
 
     }
 

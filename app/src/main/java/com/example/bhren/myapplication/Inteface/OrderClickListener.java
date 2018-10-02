@@ -1,6 +1,8 @@
 package com.example.bhren.myapplication.Inteface;
 
+import com.example.bhren.myapplication.Common.TempOrderBill;
+
 public interface OrderClickListener {
-    void onOrderDelete(String key);
-    void onOrderEdit(String honeyName, String key, String currentQuantity, String currentPrice);
+    void onOrderDelete(TempOrderBill tempOrderBill);
+    void onOrderEdit(TempOrderBill tempOrderBill);
 }
