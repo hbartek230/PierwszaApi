@@ -6,19 +6,15 @@ public class EditOrderPresenter implements EditOrderContract.Presenter {
 
     public TempOrderBill tempOrderBill;
     private EditOrderContract.View view;
+    private String editedQuantity;
 
     public void setView(EditOrderContract.View view) {
         this.view = view;
     }
 
-    public void viewCreated() {
-
-    }
-
-    public void getTempOrderBill(TempOrderBill tempOrderBill) {
-        this.tempOrderBill = tempOrderBill;
-        System.out.println("SPRAWDZAMY" + tempOrderBill);
-        view.showCurrentValuesView(tempOrderBill);
+    public void viewCreated(String quantity, String price){
+        //this.editedQuantity = quantity;
+        view.showCurrentValuesView(quantity, price);
     }
 
     @Override

@@ -5,15 +5,11 @@ import com.example.bhren.myapplication.Common.TempOrderBill;
 public interface EditOrderContract {
     interface View {
 
-        void showCurrentValuesView(TempOrderBill tempOrderBill);
+        void showCurrentValuesView(String quantity, String price);
 
     }
 
     interface Presenter {
-
-        void viewCreated();
-
-        void getTempOrderBill(TempOrderBill tempOrderBill);
 
         void editOrderSavePressed(TempOrderBill tempOrderBill);
     }

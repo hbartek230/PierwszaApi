@@ -19,6 +19,7 @@ import com.example.bhren.myapplication.Inteface.OrderClickListener;
 import com.example.bhren.myapplication.Inteface.ShowOrderContract;
 import com.example.bhren.myapplication.ViewHolder.OrderAdapter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -83,8 +84,10 @@ public class ShowOrderFragment extends Fragment implements OrderClickListener, S
 
     @Override
     public void showUpdateTempOrderItemView(TempOrderBill tempOrderBill) {
-        editPresenter.getTempOrderBill(tempOrderBill);
-        startActivity(new Intent(getContext(), EditOrderActivity.class));
+        Intent editOrder = new Intent(getContext(), EditOrderActivity.class);
+        editOrder.putExtra("tempOrderBillQuantity", tempOrderBill.getTempOrder().getQuantity());
+        editOrder.putExtra("tempOrderBillPrice", tempOrderBill.getTempOrder().getAmount());
+        startActivity(editOrder);
     }
 
     @Override
