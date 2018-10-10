@@ -85,8 +85,9 @@ public class ShowOrderFragment extends Fragment implements OrderClickListener, S
     @Override
     public void showUpdateTempOrderItemView(TempOrderBill tempOrderBill) {
         Intent editOrder = new Intent(getContext(), EditOrderActivity.class);
-        editOrder.putExtra("tempOrderBillQuantity", tempOrderBill.getTempOrder().getQuantity());
-        editOrder.putExtra("tempOrderBillPrice", tempOrderBill.getTempOrder().getAmount());
+        Bundle passBundle = new Bundle();
+        passBundle.putSerializable("tempOrderBill", tempOrderBill);
+        editOrder.putExtras(passBundle);
         startActivity(editOrder);
     }
 

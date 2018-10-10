@@ -1,10 +1,7 @@
 package com.example.bhren.myapplication.EditOrder;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,7 +30,8 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     @BindView(R.id.changePriceSwitcher)
     protected Switch priceSwitcher;
 
-    private String quantity, price;
+    Bundle retrieveBundle;
+    TempOrderBill tempOrderBill;
     private Unbinder unbinder;
     private EditOrderPresenter editPresenter;
 
@@ -48,15 +46,15 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
 
     private void generateView() {
         unbinder = ButterKnife.bind(this);
-        quantity = getIntent().getExtras().getString("tempOrderBillQuantity");
-        price = getIntent().getExtras().getString("tempOrderBillPrice");
-        editPresenter.viewCreated(quantity, price);
+        retrieveBundle = getIntent().getExtras();
+        tempOrderBill = (TempOrderBill) retrieveBundle.getSerializable("tempOrderBill");
+        editPresenter.viewCreated(tempOrderBill);
     }
 
     @Override
-    public void showCurrentValuesView(String quantity, String price) {
-        twCurrentQuantity.setText(quantity);
-        twCurrentPrice.setText(price);
+    public void showCurrentValuesView(TempOrderBill tempOrderBill) {
+        twCurrentQuantity.setText(tempOrderBill.getTempOrder().getQuantity());
+        twCurrentPrice.setText(tempOrderBill.getTempOrder().getAmount());
         System.out.println("TEŚCIK");
     }
 
