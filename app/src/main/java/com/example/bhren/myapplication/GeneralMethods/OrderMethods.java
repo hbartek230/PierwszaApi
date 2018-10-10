@@ -26,16 +26,14 @@ public class OrderMethods {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(spinnerId).exists()) {
                     Amount amount = dataSnapshot.child(spinnerId).getValue(Amount.class);
-                    firebaseCallback.onCallback(amount.getAmount());
+                    firebaseCallback.onGetHoneyNameCallback(amount.getAmount());
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
     }
 
     public int returnOrderPrice(int honeySinglePrice, int honeyQuantity) {

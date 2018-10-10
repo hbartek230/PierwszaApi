@@ -1,8 +1,25 @@
-package com.example.bhren.myapplication;
+/*package com.example.bhren.myapplication;
+
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.bhren.myapplication.GeneralMethods.OrderMethods;
+import com.example.bhren.myapplication.Inteface.FirebaseCallback;
+
+import butterknife.BindView;
 
 public class UpdateTempOrderItemDialog {
 
-    /*@BindView(R.id.etNewQuantity)
+    @BindView(R.id.etNewQuantity)
     private EditText etNewQuantity;
 
     @BindView(R.id.etNewPrice)
@@ -20,6 +37,8 @@ public class UpdateTempOrderItemDialog {
     @BindView(R.id.twCurrentPrice)
     private TextView twCurrentPrice;
 
+    private OrderMethods controller;
+
     public void showUpdateDialog(String orderItem, String key, String currentQuantity, String currentPrice) {
 
         AlertDialog.Builder buildDialog = new AlertDialog.Builder(getContext());
@@ -35,7 +54,12 @@ public class UpdateTempOrderItemDialog {
         AlertDialog updateDialog = buildDialog.create();
         updateDialog.show();
 
-        controller.getHoneyAmount(amount -> honeyAmount = amount, honeyName);
+        controller.getHoneyAmount(new FirebaseCallback() {
+            @Override
+            public void onGetHoneyNameCallback(String amount) {
+                honeyAmount = amount;
+            }
+        }, honeyName);
         customPrice();
         etNewQuantity.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,6 +106,7 @@ public class UpdateTempOrderItemDialog {
         });
     }
 
+
     private void setPrice() {
         if (!priceSwitcher.isChecked()) {
             etNewPrice.setText(Integer.toString(controller.returnOrderPrice(
@@ -89,5 +114,6 @@ public class UpdateTempOrderItemDialog {
                     Integer.parseInt(etNewQuantity.getText().toString()))));
         }
     }
-*/
+
 }
+*/

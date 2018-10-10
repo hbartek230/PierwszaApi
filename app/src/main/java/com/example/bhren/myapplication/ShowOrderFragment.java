@@ -14,12 +14,10 @@ import android.widget.TextView;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.EditOrder.EditOrderActivity;
-import com.example.bhren.myapplication.EditOrder.EditOrderPresenter;
 import com.example.bhren.myapplication.Inteface.OrderClickListener;
 import com.example.bhren.myapplication.Inteface.ShowOrderContract;
 import com.example.bhren.myapplication.ViewHolder.OrderAdapter;
 
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,14 +33,12 @@ public class ShowOrderFragment extends Fragment implements OrderClickListener, S
 
     private OrderAdapter adapter;
     private ShowOrderPresenter showPresenter;
-    private EditOrderPresenter editPresenter;
     private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showPresenter = new ShowOrderPresenter(new FirebaseTempOrderRepository(new TempOrderService()));
-        editPresenter = new EditOrderPresenter();
         showPresenter.setView(this);
     }
 

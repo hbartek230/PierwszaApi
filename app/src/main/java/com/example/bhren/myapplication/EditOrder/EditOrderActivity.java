@@ -7,6 +7,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
+import com.example.bhren.myapplication.GeneralMethods.OrderMethods;
 import com.example.bhren.myapplication.R;
 
 import butterknife.BindView;
@@ -34,12 +35,16 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     TempOrderBill tempOrderBill;
     private Unbinder unbinder;
     private EditOrderPresenter editPresenter;
+    private OrderMethods controller;
+    private String honeyPrice;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order);
         editPresenter = new EditOrderPresenter();
+        controller = new OrderMethods();
         editPresenter.setView(this);
         generateView();
     }
@@ -55,7 +60,35 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     public void showCurrentValuesView(TempOrderBill tempOrderBill) {
         twCurrentQuantity.setText(tempOrderBill.getTempOrder().getQuantity());
         twCurrentPrice.setText(tempOrderBill.getTempOrder().getAmount());
-        System.out.println("TEŚCIK");
+    }
+
+    @Override
+    public void setMainPrice(String mainHoneyPrice) {
+        honeyPrice = mainHoneyPrice;
+        editPresenter.priceSwitcherChecked(priceSwitcher.isChecked());
+        newQuantityTypped();
+    }
+
+    @Override
+    public void setPriceEditable() {
+        priceSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                etNewPrice.setText("");
+                etNewPrice.setEnabled(true);
+            } else {
+                etNewPrice.setEnabled(false);
+                editPresenter.switcherNotChecked(Integer.parseInt(honeyPrice), Integer.parseInt(etNewQuantity.getText().toString()));
+            }
+        });
+    }
+
+    @Override
+    public void setHoneyPrice(int summaryHoneyPrice) {
+        etNewPrice.setText(Integer.toString(summaryHoneyPrice));
+    }
+
+    private void newQuantityTypped() {
+
     }
 
     @Override

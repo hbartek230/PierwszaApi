@@ -1,5 +1,5 @@
 package com.example.bhren.myapplication.Inteface;
 
 public interface FirebaseCallback {
-    void onCallback(String amount);
+    void onGetHoneyNameCallback(String amount);
 }
