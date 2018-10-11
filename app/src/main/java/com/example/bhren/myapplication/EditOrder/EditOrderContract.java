@@ -7,11 +7,11 @@ public interface EditOrderContract {
 
         void showCurrentValuesView(TempOrderBill tempOrderBill);
 
-        void setPriceEditable();
+        void setPriceEditableView();
 
-        void setHoneyPrice(int summaryHoneyPrice);
+        void setHoneyPriceView(int summaryHoneyPrice);
 
-        void setMainPrice(String honeyPrice);
+        void setMainPriceView(String honeyPrice);
 
     }
 
@@ -19,12 +19,14 @@ public interface EditOrderContract {
 
         void setView(View view);
 
-        void viewCreated(TempOrderBill tempOrderBill);
+        void createFinalView(TempOrderBill tempOrderBill);
 
         void editOrderSavePressed(TempOrderBill tempOrderBill);
 
         void priceSwitcherChecked(boolean isChecked);
 
         void switcherNotChecked(int honeySinglePrice, int honeyQuantity);
+
+        void newQuantityTypped(String honeyPrice, String quantity);
     }
 }

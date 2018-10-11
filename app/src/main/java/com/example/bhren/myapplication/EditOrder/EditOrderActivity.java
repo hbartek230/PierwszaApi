@@ -2,12 +2,13 @@ package com.example.bhren.myapplication.EditOrder;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
-import com.example.bhren.myapplication.GeneralMethods.OrderMethods;
 import com.example.bhren.myapplication.R;
 
 import butterknife.BindView;
@@ -35,7 +36,6 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     TempOrderBill tempOrderBill;
     private Unbinder unbinder;
     private EditOrderPresenter editPresenter;
-    private OrderMethods controller;
     private String honeyPrice;
 
 
@@ -44,7 +44,6 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order);
         editPresenter = new EditOrderPresenter();
-        controller = new OrderMethods();
         editPresenter.setView(this);
         generateView();
     }
@@ -53,7 +52,8 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
         unbinder = ButterKnife.bind(this);
         retrieveBundle = getIntent().getExtras();
         tempOrderBill = (TempOrderBill) retrieveBundle.getSerializable("tempOrderBill");
-        editPresenter.viewCreated(tempOrderBill);
+        etNewPrice.setText("0");
+        editPresenter.createFinalView(tempOrderBill);
     }
 
     @Override
@@ -63,14 +63,14 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     }
 
     @Override
-    public void setMainPrice(String mainHoneyPrice) {
+    public void setMainPriceView(String mainHoneyPrice) {
         honeyPrice = mainHoneyPrice;
         editPresenter.priceSwitcherChecked(priceSwitcher.isChecked());
-        newQuantityTypped();
+        editTextQuantityTypped();
     }
 
     @Override
-    public void setPriceEditable() {
+    public void setPriceEditableView() {
         priceSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 etNewPrice.setText("");
@@ -83,12 +83,32 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     }
 
     @Override
-    public void setHoneyPrice(int summaryHoneyPrice) {
+    public void setHoneyPriceView(int summaryHoneyPrice) {
         etNewPrice.setText(Integer.toString(summaryHoneyPrice));
     }
 
-    private void newQuantityTypped() {
+    private void editTextQuantityTypped() {
+        etNewQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!etNewQuantity.getText().toString().trim().isEmpty() && !priceSwitcher.isChecked()) {
+                    String quantity = etNewQuantity.getText().toString().trim();
+                    editPresenter.newQuantityTypped(honeyPrice, quantity);
+                } else {
+                    etNewPrice.setText("0");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override

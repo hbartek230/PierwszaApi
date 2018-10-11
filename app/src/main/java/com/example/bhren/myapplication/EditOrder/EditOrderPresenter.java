@@ -16,10 +16,10 @@ public class EditOrderPresenter implements EditOrderContract.Presenter {
     }
 
     @Override
-    public void viewCreated(TempOrderBill tempOrderBill) {
+    public void createFinalView(TempOrderBill tempOrderBill) {
         controller.getHoneyAmount(amount -> {
             honeyPrice = amount;
-            view.setMainPrice(honeyPrice);
+            view.setMainPriceView(honeyPrice);
         }, tempOrderBill.getTempOrder().getKind());
         view.showCurrentValuesView(tempOrderBill);
     }
@@ -31,14 +31,23 @@ public class EditOrderPresenter implements EditOrderContract.Presenter {
 
     @Override
     public void priceSwitcherChecked(boolean isChecked) {
-        view.setPriceEditable();
+        view.setPriceEditableView();
     }
 
     @Override
     public void switcherNotChecked(int honeySinglePrice, int honeyQuantity) {
+        calculatePrice(honeySinglePrice, honeyQuantity);
+    }
+
+    @Override
+    public void newQuantityTypped(String honeyPrice, String quantity) {
+        calculatePrice(Integer.parseInt(honeyPrice), Integer.parseInt(quantity));
+    }
+
+    public void calculatePrice(int singlePrice, int quantity) {
         OrderMethods controller = new OrderMethods();
-        int summaryHoneyPrice = controller.returnOrderPrice(honeySinglePrice, honeyQuantity);
-        view.setHoneyPrice(summaryHoneyPrice);
+        int summaryHoneyPrice = controller.returnOrderPrice(singlePrice, quantity);
+        view.setHoneyPriceView(summaryHoneyPrice);
     }
 
 
