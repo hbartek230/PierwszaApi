@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,8 +34,11 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     @BindView(R.id.changePriceSwitcher)
     protected Switch priceSwitcher;
 
-    Bundle retrieveBundle;
-    TempOrderBill tempOrderBill;
+    @BindView(R.id.btnSave)
+    protected Button saveChangesButton;
+
+    private Bundle retrieveBundle;
+    private TempOrderBill tempOrderBill;
     private Unbinder unbinder;
     private EditOrderPresenter editPresenter;
     private String honeyPrice;
@@ -43,7 +48,7 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order);
-        editPresenter = new EditOrderPresenter();
+        editPresenter = new EditOrderPresenter(new FirebaseEditOrderRepository(new EditOrderService()));
         editPresenter.setView(this);
         generateView();
     }
@@ -65,26 +70,27 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
     @Override
     public void setMainPriceView(String mainHoneyPrice) {
         honeyPrice = mainHoneyPrice;
-        editPresenter.priceSwitcherChecked(priceSwitcher.isChecked());
-        editTextQuantityTypped();
+        controlMethods();
     }
 
-    @Override
-    public void setPriceEditableView() {
+    private void controlMethods() {
+        editTextQuantityTypped();
+        customPriceSwitcherCheckedChange();
+        saveData();
+    }
+
+    private void customPriceSwitcherCheckedChange() {
         priceSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 etNewPrice.setText("");
                 etNewPrice.setEnabled(true);
             } else {
                 etNewPrice.setEnabled(false);
-                editPresenter.switcherNotChecked(Integer.parseInt(honeyPrice), Integer.parseInt(etNewQuantity.getText().toString()));
+                if (!etNewQuantity.getText().toString().trim().isEmpty()) {
+                    editPresenter.switcherNotChecked(Integer.parseInt(honeyPrice), Integer.parseInt(etNewQuantity.getText().toString()));
+                }
             }
         });
-    }
-
-    @Override
-    public void setHoneyPriceView(int summaryHoneyPrice) {
-        etNewPrice.setText(Integer.toString(summaryHoneyPrice));
     }
 
     private void editTextQuantityTypped() {
@@ -109,6 +115,26 @@ public class EditOrderActivity extends AppCompatActivity implements EditOrderCon
 
             }
         });
+    }
+
+    private void saveData() {
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String firebaseKey = tempOrderBill.getKey();
+                String honeyQuantity = etNewQuantity.getText().toString();
+                String honeyKind = tempOrderBill.getTempOrder().getKind();
+                String honeyPrice = etNewPrice.getText().toString();
+                editPresenter.saveChangesButtonPressed(firebaseKey, honeyPrice, honeyKind, honeyQuantity);
+                finish();
+            }
+        });
+        System.out.println("EditOrderActivity");
+    }
+
+    @Override
+    public void setHoneyPriceView(int summaryHoneyPrice) {
+        etNewPrice.setText(Integer.toString(summaryHoneyPrice));
     }
 
     @Override
