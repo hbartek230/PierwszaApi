@@ -12,6 +12,8 @@ public interface ShowOrderContract {
         void showUpdateTempOrderItemView(TempOrderBill tempOrderBill);
 
         void showBillSumarryView(int currentPrice);
+
+        void sendEmail(String kind, String quantity, String price);
     }
 
     interface Presenter {
@@ -19,6 +21,8 @@ public interface ShowOrderContract {
         void setView(View view);
 
         void viewCreated();
+
+        void setEmailMessage();
 
         void orderDeletePressed(TempOrderBill tempOrderBill);
 

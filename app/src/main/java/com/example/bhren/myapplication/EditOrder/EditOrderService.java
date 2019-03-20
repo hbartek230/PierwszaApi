@@ -12,7 +12,6 @@ public class EditOrderService {
     public void editOrderInFirebase(String key, String price, String kind, String quantity){
         TempOrder updatedData = new TempOrder(price, kind, quantity);
         database.child(key).setValue(updatedData);
-        System.out.println("EditOrderService");
     }
 
 }

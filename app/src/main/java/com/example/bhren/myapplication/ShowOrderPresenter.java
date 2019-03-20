@@ -6,9 +6,11 @@ import android.view.View;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.Common.TempOrderBillWithState;
+import com.example.bhren.myapplication.EmailSender.SendMail;
 import com.example.bhren.myapplication.Inteface.ShowOrderContract;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -19,10 +21,13 @@ public class ShowOrderPresenter implements ShowOrderContract.Presenter {
     private final TempOrderRepository tempOrderRepository;
     private final List<TempOrderBill> tempOrderBills;
     private ShowOrderContract.View view;
+    private List<String>[] messageTable;
+    String message;
 
     public ShowOrderPresenter(TempOrderRepository tempOrderRepository) {
         this.tempOrderRepository = tempOrderRepository;
         tempOrderBills = new ArrayList<>();
+        messageTable = new List[3];
     }
 
     @Override
@@ -99,6 +104,32 @@ public class ShowOrderPresenter implements ShowOrderContract.Presenter {
             currentPrice += Integer.parseInt(tempOrderBill.getTempOrder().getAmount());
         }
         view.showBillSumarryView(currentPrice);
+    }
+
+    public void setEmailMessage(){
+        setMessage();
+    }
+
+    private void setMessage(){
+        String kind = null, quantity = null, price = null;
+        //List<String> listOfKinds = new ArrayList<>();
+        //List<String> listOfQuantites = new ArrayList<>();
+        //List<String> listOfPrices = new ArrayList<>();
+        for(TempOrderBill tempOrderBill : tempOrderBills) {
+            kind = tempOrderBill.getTempOrder().getKind();
+            quantity = tempOrderBill.getTempOrder().getQuantity();
+            price = tempOrderBill.getTempOrder().getAmount();
+            System.out.println("Rodzaj: " + kind);
+            //listOfKinds.add(kind);
+            //listOfQuantites.add(quantity);
+            //listOfPrices.add(price);
+        }
+            //messageTable[0] = listOfKinds;
+            //messageTable[1] = listOfQuantites;
+            //messageTable[2] = listOfPrices;
+
+
+        view.sendEmail(kind, quantity, price);
     }
 
     @Override

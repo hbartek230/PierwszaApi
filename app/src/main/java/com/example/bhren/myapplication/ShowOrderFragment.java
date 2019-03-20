@@ -10,10 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bhren.myapplication.Common.TempOrderBill;
 import com.example.bhren.myapplication.EditOrder.EditOrderActivity;
+import com.example.bhren.myapplication.EmailSender.SendMail;
 import com.example.bhren.myapplication.Inteface.OrderClickListener;
 import com.example.bhren.myapplication.Inteface.ShowOrderContract;
 import com.example.bhren.myapplication.ViewHolder.OrderAdapter;
@@ -30,6 +33,11 @@ public class ShowOrderFragment extends Fragment implements OrderClickListener, S
     protected RecyclerView order_recycler;
     @BindView(R.id.twPrice)
     protected TextView priceLabel;
+    @BindView(R.id.btnOrder)
+    protected Button orderButton;
+    @BindView(R.id.etEmail)
+    protected EditText etEmail;
+
 
     private OrderAdapter adapter;
     private ShowOrderPresenter showPresenter;
@@ -55,6 +63,22 @@ public class ShowOrderFragment extends Fragment implements OrderClickListener, S
         order_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new OrderAdapter(this);
         order_recycler.setAdapter(adapter);
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPresenter.setEmailMessage();
+            }
+        });
+    }
+
+
+    public void sendEmail(String kind, String quantity, String price) {
+        String email = etEmail.getText().toString().trim();
+        String subject = "Zamówienie z BeeCompany";
+        String message = getString(R.string.act_order_email_message, kind, getString(R.string.act_order_bill_summary_currency, Integer.parseInt(quantity)), price, priceLabel.getText().toString().trim());
+        SendMail sm = new SendMail(getContext(), email, subject, message);
+        sm.execute();
+
     }
 
     @Override
