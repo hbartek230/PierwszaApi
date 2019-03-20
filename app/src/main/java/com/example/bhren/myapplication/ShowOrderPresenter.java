@@ -115,11 +115,16 @@ public class ShowOrderPresenter implements ShowOrderContract.Presenter {
         //List<String> listOfKinds = new ArrayList<>();
         //List<String> listOfQuantites = new ArrayList<>();
         //List<String> listOfPrices = new ArrayList<>();
+        System.out.printf("%10s %5s %5s", "Kind", "Quantity", "Price");
+        System.out.println();
         for(TempOrderBill tempOrderBill : tempOrderBills) {
-            kind = tempOrderBill.getTempOrder().getKind();
-            quantity = tempOrderBill.getTempOrder().getQuantity();
-            price = tempOrderBill.getTempOrder().getAmount();
-            System.out.println("Rodzaj: " + kind);
+            //kind = tempOrderBill.getTempOrder().getKind();
+            //quantity = tempOrderBill.getTempOrder().getQuantity();
+            //price = tempOrderBill.getTempOrder().getAmount();
+            System.out.format("%10s %5s %5s", tempOrderBill.getTempOrder().getKind(), tempOrderBill.getTempOrder().getQuantity(), tempOrderBill.getTempOrder().getAmount());
+            System.out.println();
+
+            //System.out.println("Rodzaj: " + kind);
             //listOfKinds.add(kind);
             //listOfQuantites.add(quantity);
             //listOfPrices.add(price);
@@ -129,7 +134,7 @@ public class ShowOrderPresenter implements ShowOrderContract.Presenter {
             //messageTable[2] = listOfPrices;
 
 
-        view.sendEmail(kind, quantity, price);
+        //view.sendEmail(kind, quantity, price);
     }
 
     @Override

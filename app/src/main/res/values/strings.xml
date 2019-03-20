@@ -54,10 +54,10 @@
     <string name="act_order_bill_summary_currency">%1$d USD</string>
     <string name="act_order_email_message">Witaj,\n\n
     Dziękujemy za złożenie zamówienia w naszym sklepie.\n\n
-    Twoje zamówienie wygląda następująco:\n\n\n
-    Rodzaj miodu: \t%1$s\n
-    Ilość słoików: \t%2$s\n
-    Cena: \t%3$s\n\n
+    Twoje zamówienie wygląda następująco:\n\n
+    Rodzaj miodu: %1$s\n
+    Ilość słoików: %2$s\n
+    Cena: %3$s\n\n
     Całkowita cena do zapłaty to: %4$s\n\n
     Zapraszamy ponownie do skorzystania z naszej oferty.\n\n
     Pozdrawiamy\n
